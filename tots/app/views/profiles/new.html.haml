@@ -1,0 +1,32 @@
+= form_for @profile, as: :profile, url: profiles_path, method: :post do |f|
+  = label_tag(:status, "Full Name:")
+  = text_field_tag(:name)
+  %br
+  = label_tag(:status, "What is your status?")
+  = text_field_tag(:status)
+  %br
+  = label_tag(:location, "where are you?")
+  = text_field_tag(:location)
+  %br
+  = label_tag(:picture, "Do you have a profile image you would like to use?")
+  = text_field_tag(:picture)
+  %br
+  = label_tag(:monday, "Monday")
+  = check_box(:monday, :available)
+  = label_tag(:tuesday, "Tuesday")
+  = check_box(:tuesday, :available)
+  = label_tag(:wednesday, "Wednesday")
+  = check_box(:wednesday, :available)
+  = label_tag(:thursday, "Thursday")
+  = check_box(:thursday, :available)
+  = label_tag(:friday, "Friday")
+  = check_box(:friday, :available)
+  = label_tag(:saturday, "Saturday")
+  = check_box(:saturday, :available)
+  = label_tag(:sunday, "Sunday")
+  = check_box(:sunday, :available)
+  %br
+  = label_tag(:available, "Write your Availablity. Use the following format:  00:00 - 23:59, with line returns between time periods")
+  %br
+  = text_area(:available, :time_available)
+  = submit_tag("Create")
