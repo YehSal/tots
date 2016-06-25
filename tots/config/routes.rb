@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users
+  resources :groups
+  resources :home
+  resources :profiles
+
+  # resources :users
+  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+
+
 
   # devise_scope :user do
   #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
@@ -10,6 +19,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get '/index' => 'groups#new'
+  # get '/facebook' to: ''
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
