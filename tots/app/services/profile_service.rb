@@ -98,7 +98,7 @@ class ProfileService
                        '46'=>'01:00',
                        '47'=>'00:30',
                        '48'=>'00:00' }
-    times = @raw_param['available']['time_available'].split("\r\n")
+    times = @raw_param['available'].split("\r\n")
     availability_string = ""
     former_stop = 48
     times.each do |x|
