@@ -11,9 +11,10 @@ class MaskService
   def to_mask #returns an integer bit-mask value
     binar_mask = (@day_string.to_i(2) << @hour_size) + @available.to_i(2)
     binar_mask
+
   end
 
-  def self.is_available?(mask_current,mask_available) #returns true false. True indicates tat mask_available contains mask_current
+  def is_available?(mask_current,mask_available) #returns true false. True indicates tat mask_available contains mask_current
     current_day = mask_current >> @hour_size
     available_day = mask_available >> @hour_size
 
@@ -27,13 +28,13 @@ class MaskService
   end
 
   def to_info(mask) #returns an array with two elements, the first is an array of days which are indicated by the mask, and the second is an array of the half-hours indicated by the mask
-    day_hash = { '1'=>'Sunday',
-                 '2'=>'Saturday',
-                 '3'=>'Friday',
-                 '4'=>'Thursday',
-                 '5'=>'Wednesday',
-                 '6'=>'Tuesday',
-                 '7'=>'Monday'}
+    day_hash = { '1'=>'sunday',
+                 '2'=>'saturday',
+                 '3'=>'friday',
+                 '4'=>'thursday',
+                 '5'=>'wednesday',
+                 '6'=>'tuesday',
+                 '7'=>'monday'}
     half_hour_hash = { '1'=>'23:30',
                        '2'=>'23:00',
                        '3'=>'22:30',
@@ -62,42 +63,81 @@ class MaskService
                        '26'=>'11:00',
                        '27'=>'10:30',
                        '28'=>'10:00',
-                       '29'=>'9:30',
-                       '30'=>'9:00',
-                       '31'=>'8:30',
-                       '32'=>'8:00',
-                       '33'=>'7:30',
-                       '34'=>'7:00',
-                       '35'=>'6:30',
-                       '36'=>'6:00',
-                       '37'=>'5:30',
-                       '38'=>'5:00',
-                       '39'=>'4:30',
-                       '40'=>'4:00',
-                       '41'=>'3:30',
-                       '42'=>'3:00',
-                       '43'=>'2:30',
-                       '44'=>'2:00',
-                       '45'=>'1:30',
-                       '46'=>'1:00',
-                       '47'=>'0:30',
-                       '48'=>'0:00' }
+                       '29'=>'09:30',
+                       '30'=>'09:00',
+                       '31'=>'08:30',
+                       '32'=>'08:00',
+                       '33'=>'07:30',
+                       '34'=>'07:00',
+                       '35'=>'06:30',
+                       '36'=>'06:00',
+                       '37'=>'05:30',
+                       '38'=>'05:00',
+                       '39'=>'04:30',
+                       '40'=>'04:00',
+                       '41'=>'03:30',
+                       '42'=>'03:00',
+                       '43'=>'02:30',
+                       '44'=>'02:00',
+                       '45'=>'01:30',
+                       '46'=>'01:00',
+                       '47'=>'00:30',
+                       '48'=>'00:00' }
+                      #  times = @raw_param['available']['time_available'].split("\r\n")
+                      #  availability_string = ""
+                      #  former_stop = 48
+                      #  times.each do |x|
+                      #    span = x.split(" - ")
+                      #    start,stop = half_hour_hash.key(span[0]).to_i,half_hour_hash.key(span[1]).to_i
+                      #    former_stop.downto(start) do |x|
+                      #      availability_string += "0"
+                      #    end
+                      #    start.downto(stop) do |x|
+                      #      availability_string += "1"
+                      #    end
+                      #    former_stop = stop
+                      #  end
+                      #  available_out = (availability_string.to_i(2) << former_stop).to_s(2)
     days = mask >> @hour_size
     half_hours = '111111111111111111111111111111111111111111111111'.to_i(2) & mask
     out_array = [[],[]]
+    out_array[1] = ""
     1.upto(@day_size) do |x|
       if days % 2 == 1
         out_array[0] << day_hash["#{x}"]
       end
       days = days >> 1
     end
-    1.upto(@hour_size) do |x|
-      if half_hours % 2 == 1
-        out_array[1] << half_hour_hash["#{x}"]
+    last_half_hours = 0
+    # 1.upto(@hour_size) do |x|
+    #   if half_hours % 2 == 1 && last_half_hours % 2 == 0
+    #
+    #     out_array[1] = out_array[1] + half_hour_hash["#{x}"]
+    #   elsif half_hours % 2 == 0 && last_half_hours % 2 == 1
+    #     out_array[1] =     out_array[1] + " - #{half_hour_hash["#{last_half_hours}"]}\r\n"
+    #   end
+    #   last_half_hours = half_hours
+    #   half_hours = half_hours >> 1
+    # end
+    last_half_hour = 1
+    trailing_hour = 0
+    @hour_size.downto(1) do |t|
+      veracity1 = t == @hour_size && half_hours % 2 == 1
+      veracity2 = half_hours % 2 == 1 && last_half_hour % 2 == 0
+      if veracity1 || veracity2
+        value = half_hour_hash[(49-t).to_s]
+        out_array[1] = value + "\r\n" + out_array[1]
+      elsif half_hours % 2 ==1 && last_half_hour % 2 == 1
+        trailing_hour = t
+      elsif half_hours % 2 == 0 && last_half_hour % 2 == 1
+        value = half_hour_hash[(49 - trailing_hour).to_s]
+        out_array[1] = "#{value} - " + out_array[1]
       end
+      last_half_hour = half_hours
       half_hours = half_hours >> 1
     end
     out_array
-  end
+
+    end
 
 end

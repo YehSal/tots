@@ -24,26 +24,19 @@ class ProfileService
 
   def parse
 
-
     picture = @raw_param['picture']
     location = @raw_param['location']
     status = @raw_param['status']
-    name = @raw_param['name']
-    day_availability =  @raw_param['monday']['available']+@raw_param['tuesday']['available']+@raw_param['wednesday']['available']+@raw_param['thursday']['available']+@raw_param['friday']['available']+@raw_param['saturday']['available']+@raw_param['sunday']['available']
-    # times = @raw_param['available']['time_available'].split("\r\n")
-    # availability_string = ""
-    # former_stop = 48
-    # times.each do |x|
-    #   span = x.split(" - ")
-    #   start,stop = half_hour_hash.key(span[0]).to_i,half_hour_hash.key(span[1]).to_i
-    #   former_stop.downto(start) do |x|
-    #     availability_string += "0"
-    #   end
-    #   start.downto(stop) do |x|
-    #     availability_string += "1"
-    #   end
-    #   former_stop = stop
-    # end
+    monday =  @raw_param['monday'] || '0'
+    tuesday =  @raw_param['tuesday'] || '0'
+    wednesday =  @raw_param['wednesday'] || '0'
+    thursday =  @raw_param['thursday'] || '0'
+    friday =  @raw_param['friday'] || '0'
+    saturday =  @raw_param['saturday'] || '0'
+    sunday =  @raw_param['sunday'] || '0'
+
+
+    day_availability =  monday+tuesday+wednesday+thursday+friday+saturday+sunday
     available_out = find_availability_string
     profile_mask = MaskService.new(day_availability,available_out)
     user = User.find(@user_id)
@@ -51,8 +44,7 @@ class ProfileService
     user.location = location
     user.availability = profile_mask.to_mask
     user.status = status
-    user.name = name
-    binding.pry
+
     user.save!
 
   end
@@ -86,40 +78,41 @@ class ProfileService
                        '26'=>'11:00',
                        '27'=>'10:30',
                        '28'=>'10:00',
-                       '29'=>'9:30',
-                       '30'=>'9:00',
-                       '31'=>'8:30',
-                       '32'=>'8:00',
-                       '33'=>'7:30',
-                       '34'=>'7:00',
-                       '35'=>'6:30',
-                       '36'=>'6:00',
-                       '37'=>'5:30',
-                       '38'=>'5:00',
-                       '39'=>'4:30',
-                       '40'=>'4:00',
-                       '41'=>'3:30',
-                       '42'=>'3:00',
-                       '43'=>'2:30',
-                       '44'=>'2:00',
-                       '45'=>'1:30',
-                       '46'=>'1:00',
-                       '47'=>'0:30',
-                       '48'=>'0:00' }
+                       '29'=>'09:30',
+                       '30'=>'09:00',
+                       '31'=>'08:30',
+                       '32'=>'08:00',
+                       '33'=>'07:30',
+                       '34'=>'07:00',
+                       '35'=>'06:30',
+                       '36'=>'06:00',
+                       '37'=>'05:30',
+                       '38'=>'05:00',
+                       '39'=>'04:30',
+                       '40'=>'04:00',
+                       '41'=>'03:30',
+                       '42'=>'03:00',
+                       '43'=>'02:30',
+                       '44'=>'02:00',
+                       '45'=>'01:30',
+                       '46'=>'01:00',
+                       '47'=>'00:30',
+                       '48'=>'00:00' }
     times = @raw_param['available']['time_available'].split("\r\n")
     availability_string = ""
     former_stop = 48
     times.each do |x|
       span = x.split(" - ")
       start,stop = half_hour_hash.key(span[0]).to_i,half_hour_hash.key(span[1]).to_i
-      former_stop.downto(start) do |x|
+      former_stop.downto(start+1) do |x|
         availability_string += "0"
       end
-      start.downto(stop) do |x|
+      (start).downto(stop) do |x|
         availability_string += "1"
       end
-      former_stop = stop
+      former_stop = stop -1
     end
-    available_out = (availability_string.to_i(2) << former_stop).to_s(2)
+    available_out = (availability_string.to_i(2) << (former_stop)).to_s(2)
+    available_out
 end
 end
