@@ -18,13 +18,13 @@ ActiveRecord::Schema.define(version: 20160624205924) do
 
   create_table "groups", force: :cascade do |t|
     t.string  "name"
-    t.boolean "locked?"
     t.string  "description"
+    t.boolean "private"
   end
 
   create_table "user_group_throughs", force: :cascade do |t|
-    t.string "user_id"
-    t.string "group_id"
+    t.integer "user_id"
+    t.integer "group_id"
   end
 
   create_table "users", force: :cascade do |t|

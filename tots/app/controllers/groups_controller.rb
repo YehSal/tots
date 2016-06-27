@@ -30,10 +30,6 @@ class GroupsController < ApplicationController
   def show
     id = params[:id].to_i
     @group = Group.find(id)
-
-
-
-
   end
 
   def edit
