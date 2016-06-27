@@ -25,7 +25,7 @@ RSpec.describe "mask_service will determine if you are available at a given time
     it "will return true if are available, false if not available" do
       current = MaskService.new('0001000', '000000000000000000000001000000000000000000000000')
       avail = MaskService.new('1111111', '111111111111111111111111111111111111111111111111')
-      actual = MaskService.is_available?(current.to_mask,avail.to_mask)
+      actual = current.is_available?(current.to_mask,avail.to_mask)
       expected = true
       expect(actual).to eq(expected)
     end
@@ -35,7 +35,7 @@ RSpec.describe "mask_service will determine if you are available at a given time
       it "will return true if are available, false if not available" do
         c = MaskService.new('1010101','010101010101010101010101010101010101010101010101')
         a = MaskService.new('0101010','101010101010101010101010101010101010101010101010')
-        actual = MaskService.is_available?(c.to_mask,a.to_mask)
+        actual = c.is_available?(c.to_mask,a.to_mask)
         expected = false
         expect(actual).to eq(expected)
       end
@@ -45,7 +45,7 @@ RSpec.describe "mask_service will determine if you are available at a given time
       it "will return true if are available, false if not available" do
         c = MaskService.new('1110101','010101010101011111010101010101010101010101010101')
         a = MaskService.new('0101010','100000001010101010101010101010101010101010101010')
-        actual = MaskService.is_available?(c.to_mask,a.to_mask)
+        actual = c.is_available?(c.to_mask,a.to_mask)
         expected = true
         expect(actual).to eq(expected)
       end
