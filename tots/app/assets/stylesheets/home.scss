@@ -1,3 +1,48 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin headers {
+  background: blue;
+  text-align: center;
+  font-color: black;
+}
+.new_group {
+  h1 {
+    @include headers
+
+  }
+  p {
+    @extend h1;
+  }
+}
+
+.description {
+  h1 {
+    @include headers
+  }
+  p {
+    border: 15px;
+    border-color: black;
+  }
+}
+
+.new_p {
+  h1 {
+    @include headers
+  }
+}
+.show_g {
+  h1 {
+    @include headers
+  }
+}
+.group_info {
+  h1 {
+    @include headers
+  }
+}
+
+.pp img {
+  height: 200px;
+  width: 200px;
+}
