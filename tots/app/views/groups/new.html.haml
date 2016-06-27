@@ -1,0 +1,16 @@
+%h1 Groups#new
+%p Find me in app/views/groups/new.html.erb
+
+= form_for @group_form do |i|
+  = i.label 'Group Name'
+  = i.text_field :name
+  %br
+  = i.label 'Is your group private?'
+  = i.text_field :private
+  %br
+  = i.label 'description'
+  = i.text_field :description
+  %br
+  = i.submit
+
+= link_to 'Sign Out', destroy_user_session_path, method: 'DELETE'

@@ -1,0 +1,8 @@
+%h1 home#show
+- @user_group_ids.each do |i|
+  - id = i[:group_id]
+  - j = Group.find(id)
+  - name = j[:name]
+  = link_to "#{name}", group_path(id), method: 'GET'
+  %br
+= link_to 'Home', root_path, method: 'GET'

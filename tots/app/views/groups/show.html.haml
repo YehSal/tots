@@ -1,0 +1,18 @@
+%h1
+  =@group[:name]
+%p
+  =@group[:name]
+  's details
+%br
+Group's name:
+=@group[:name]
+%br
+Group's description:
+=@group[:description]
+%br
+Group's privacy:
+=@group[:private]
+%hr
+
+
+= link_to 'Home', root_path, method: 'GET'

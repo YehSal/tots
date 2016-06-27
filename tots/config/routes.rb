@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :users
   resources :groups
   resources :home
@@ -21,7 +20,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  get '/index' => 'groups#new'
+  get '/index_index' => 'groups#new'
   # get '/facebook' to: ''
 
   # Example of regular route:
