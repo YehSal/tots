@@ -2,11 +2,12 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @user_id = current_user.id
 
   end
 
   def show
-    @user_groups = UserGroupThrough.where(user_id: current_user)
+    @user_group_ids = UserGroupThrough.where(user_id: current_user)
 
     @person = User.new
 

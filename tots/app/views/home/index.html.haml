@@ -1,0 +1,5 @@
+%h1 home#index
+
+= link_to 'Create Group', new_group_path, method: 'GET'
+= link_to 'Sign Out', destroy_user_session_path, method: 'DELETE'
+= link_to 'Show Groups', home_path(@user_id), method: 'GET'
