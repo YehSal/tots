@@ -129,7 +129,7 @@ class MaskService
         out_array[1] = value + "\r\n" + out_array[1]
       elsif half_hours % 2 ==1 && last_half_hour % 2 == 1
         trailing_hour = t
-      elsif half_hours % 2 == 0 && last_half_hour % 2 == 1
+      elsif half_hours % 2 == 0 && last_half_hour % 2 == 1 && t != @hour_size
         value = half_hour_hash[(49 - trailing_hour).to_s]
         out_array[1] = "#{value} - " + out_array[1]
       end

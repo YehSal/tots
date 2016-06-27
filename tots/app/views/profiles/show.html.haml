@@ -1,0 +1,19 @@
+Status:
+= @profile.status
+%br
+Loactaion:
+= @profile.location
+%br
+Profile Picture:
+= image_tag url = @profile.picture
+%br
+Days Available:
+= @days.reverse
+%br
+During the hours:
+= @hours
+
+.edit_button
+  =button_to 'Edit Profile', edit_profile_path(@profile.id), { :method => :get }
+.home_button
+  =button_to 'Home', home_index_path, { :method => :get }  

@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   def create
     profile = ProfileService.new(params,current_user.id)
     profile.parse
+    redirect_to profile_path(current_user.id)
   end
 
   def new
@@ -29,12 +30,16 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profile = User.find(params['id'])
+    converter = MaskService.new(0,0)
+    @days = converter.to_info(@profile.availability)[0]
+    @hours = converter.to_info(@profile.availability)[1]
   end
 
   def update
-    binding.pry
-    profile = ProfileService.new(params,current_user.id)
+    profile = ProfileService.new(params,params['id'])
     profile.parse
+    redirect_to profile_path(params['id'])
   end
 
   def destroy

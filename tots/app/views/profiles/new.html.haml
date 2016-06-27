@@ -26,5 +26,5 @@
   %br
   = label_tag(:available, "Write your Availablity. Use the following format:  00:00 - 23:59, with line returns between time periods")
   %br
-  = text_area(:available, :time_available)
+  = text_area_tag(:available,content = "")
   = submit_tag("Create")
