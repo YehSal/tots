@@ -1,3 +1,7 @@
+.new_p
+  %h1 New Profile
+  %p Create your new profile here to connect with your friends!
+
 = form_for @profile, as: :profile, url: profiles_path, method: :post do |f|
 
   = label_tag(:name, "What is your name?")
@@ -34,3 +38,5 @@
   %br
   = text_area_tag(:available,content = "")
   = submit_tag("Create")
+
+= link_to 'Home', root_path, method: 'GET'

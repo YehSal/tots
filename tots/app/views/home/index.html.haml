@@ -1,13 +1,14 @@
 .description
-  %h3
+  %h1
     Text on Time Service
   %p
-    [Enter a description here]
+    Tots is a group messaging app that allows you to know the time for every one of your friends so you know when it's appropritate to text. If you have friends and family spread accross the globe, this is the app for you!
 .groups
   .display_current_groups
-  
+
 .my_profile
   =button_to 'My Profile', profile_path(@person.id), { :method => :get }
+  %br
 .my_profile
   =button_to 'New Profile',new_profile_path, { :method => :get }
   %br

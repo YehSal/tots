@@ -1,4 +1,6 @@
-%h1 home#show
+.show_g
+  %h1 Group list
+  %p Please select a group to see more information about it and its users
 - @user_group_ids.each do |i|
   - id = i[:group_id]
   - j = Group.find(id)

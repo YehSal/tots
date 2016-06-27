@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
     i.description = group_hash[:description]
     i.private = group_hash[:private]
     i.save!
+    @group = i
 
      # update through table
     j = UserGroupThrough.new
@@ -23,13 +24,16 @@ class GroupsController < ApplicationController
     j.group_id = i.id
     j.save!
 
-    binding.pry
     render :show
   end
 
   def show
     id = params[:id].to_i
     @group = Group.find(id)
+    # @profile = User.find(params['id'])
+    converter = MaskService.new(0,0)
+    @days = converter.to_info(@profile.availability)[0]
+    @hours = converter.to_info(@profile.availability)[1]
   end
 
   def edit
