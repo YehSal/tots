@@ -9,3 +9,9 @@
     [pull information from groups in controller to display here]
 .my_profile
   =button_to 'My Profile', profile_path(@person.id), { :method => :get }
+  %br
+  = link_to 'Create Group', new_group_path, method: 'GET'
+  %br
+  = link_to 'Sign Out', destroy_user_session_path, method: 'DELETE'
+  %br
+  = link_to 'Show Groups', home_path(@user_id), method: 'GET'
