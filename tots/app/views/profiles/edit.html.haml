@@ -1,8 +1,14 @@
 = form_for @profile, as: :profile, url: profile_path, method: :patch do |f|
 
+  = label_tag(:name, "What is your name?")
+  = text_field_tag(:name, @profile.name)
+  %br
   = label_tag(:status, "What is your status?")
   = text_field_tag(:status, @profile.status)
   %br
+  -# = label_tag(:email, "What is your email?")
+  -# = text_field_tag(:email, @profile.email)
+  -# %br
   = label_tag(:location, "where are you?")
   = text_field_tag(:location, @profile.location)
   %br

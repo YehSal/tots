@@ -3,15 +3,13 @@
     Text on Time Service
   %p
     [Enter a description here]
-.groups
-  button_tag(name = "Create Group", action: groups_path, method: get)
-  .display_current_groups
-    [pull information from groups in controller to display here]
 .my_profile
   =button_to 'My Profile', profile_path(@person.id), { :method => :get }
+.my_profile
+  =button_to 'New Profile',new_profile_path, { :method => :get }
   %br
-  = link_to 'Create Group', new_group_path, method: 'GET'
+  = button_to 'Create Group', new_group_path, {:method => :get}
   %br
-  = link_to 'Sign Out', destroy_user_session_path, method: 'DELETE'
+  = button_to 'Sign Out', destroy_user_session_path, {:method => :delete}
   %br
-  = link_to 'Show Groups', home_path(@user_id), method: 'GET'
+  = button_to 'Show Groups', home_path(@user_id), {:method => :get}

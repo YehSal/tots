@@ -1,5 +1,11 @@
+Name:
+= @profile.name
+%br
 Status:
 = @profile.status
+%br
+Email:
+= @profile.email
 %br
 Loactaion:
 = @profile.location
@@ -16,4 +22,4 @@ During the hours:
 .edit_button
   =button_to 'Edit Profile', edit_profile_path(@profile.id), { :method => :get }
 .home_button
-  =button_to 'Home', home_index_path, { :method => :get }  
+  =button_to 'Home', home_index_path, { :method => :get }

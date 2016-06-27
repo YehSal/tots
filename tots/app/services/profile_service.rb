@@ -34,7 +34,8 @@ class ProfileService
     friday =  @raw_param['friday'] || '0'
     saturday =  @raw_param['saturday'] || '0'
     sunday =  @raw_param['sunday'] || '0'
-
+    # email = @raw_param['email']
+    name = @raw_param['name']
 
     day_availability =  monday+tuesday+wednesday+thursday+friday+saturday+sunday
     available_out = find_availability_string
@@ -44,7 +45,8 @@ class ProfileService
     user.location = location
     user.availability = profile_mask.to_mask
     user.status = status
-
+    user.name = name
+    # user.email = email
     user.save!
 
   end
