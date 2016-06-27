@@ -1,3 +1,19 @@
 // Place all the styles related to the Profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.topbar{
+  display: inline;
+  margin: auto;
+}
+.sign_out {
+  float: right;
+  // flex: 1;
+}
+.topbar h1 {
+  // flex: 1;
+  text-align: center;
+}
+body {
+  font-family: "Verdana", sans-serif;
+}
