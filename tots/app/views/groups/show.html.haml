@@ -13,6 +13,19 @@ Group's description:
 Group's privacy:
 =@group[:private]
 %hr
-
+- x = UserGroupThrough.where(group_id: @group.id)
+- x.each do |i|
+  - user = User.where(id: i.user_id)
+  - binding.pry
+  -# = image_tag ("#{user[0][:picture]}")
+  - profile_pic = user[0][:picture]
+  = image_tag url = profile_pic
+  %br
+  name:
+  = user[0][:name]
+  %br
+  email:
+  = user[0][:email]
+  %hr
 
 = link_to 'Home', root_path, method: 'GET'
