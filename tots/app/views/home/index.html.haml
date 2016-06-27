@@ -5,14 +5,12 @@
     [Enter a description here]
 .groups
   .display_current_groups
-  
+
 .my_profile
   =button_to 'My Profile', profile_path(@person.id), { :method => :get }
 .my_profile
   =button_to 'New Profile',new_profile_path, { :method => :get }
   %br
   = button_to 'Create Group', new_group_path, {:method => :get}
-  %br
-  = button_to 'Sign Out', destroy_user_session_path, {:method => :delete}
   %br
   = button_to 'Show Groups', home_path(@user_id), {:method => :get}
