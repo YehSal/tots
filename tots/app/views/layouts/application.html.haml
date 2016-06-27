@@ -1,0 +1,19 @@
+!!! 5
+%html
+  %head
+    %title Tots
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %p.notice= notice
+    %p.alert= alert
+    .topbar
+      %h1
+        Tots
+
+        .sign_out
+          = button_to 'Sign Out', destroy_user_session_path, {:method => :delete}
+
+
+    = yield

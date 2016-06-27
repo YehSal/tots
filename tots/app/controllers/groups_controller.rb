@@ -23,7 +23,6 @@ class GroupsController < ApplicationController
     j.group_id = i.id
     j.save!
 
-    binding.pry
     render :show
   end
 
